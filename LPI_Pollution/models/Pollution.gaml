@@ -21,6 +21,9 @@ global {
 	
 	int nb_people<-100;
 	
+	// bikes Asumpption: bikes are the same number of people ¿?
+	
+	
 	//adding these new parameters 
 	
 	date starting_date <- date("2019-09-01-00-00-00");
@@ -31,6 +34,9 @@ global {
 	float min_speed <- 1.0 #km /#h;
 	float max_speed <-5.0 #km / #h;
 	graph the_graph;
+	
+	//adding parametres 
+	
 	
 	
 	init{
@@ -97,6 +103,7 @@ species cars{
 		draw circle(10) color:color;
 	}
  
+
 }
 
 species people skills:[moving] {
@@ -110,6 +117,21 @@ species people skills:[moving] {
 	int end_work;
 	string objective;
 	point the_target <- nil;
+	
+	
+species bikes skills:[moving] {
+	
+	rgb color <- #magenta;
+	//bike start_station <- nil; 
+	//bike end_station <- nil; 
+	//int start_travel; 
+	//int end_travel; 
+	//string objetive; 
+	//point the_target <-nil; 
+	aspect base{
+		draw circle(10) color:color;
+	}
+	}	
 	
 	// added two new reflexes time to work and stop
 	
