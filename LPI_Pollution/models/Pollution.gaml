@@ -31,7 +31,7 @@ global {
 	float min_speed <- 1.0 #km /#h;
 	float max_speed <-5.0 #km / #h;
 	graph the_graph;
-	
+	int nb_cars <- 20;
 	
 	init{
 		
@@ -59,6 +59,7 @@ global {
 			
 			location<-any_location_in(one_of(residential_building));
 			
+			
 			//adding additional parameters in the initialisation of people agent
 			
 			speed <- rnd(min_speed, max_speed);
@@ -69,6 +70,20 @@ global {
 			objective <- "resting";
 			location <- any_location_in(living_place);
 	}
+	/*create cars number: nb_cars{
+			
+			location<-any_location_in(one_of(residential_building));
+			
+			//adding additional parameters in the initialisation of people agent
+			
+			speed <- rnd(min_speed, max_speed);
+			start_work<- rnd (min_work_start,max_work_start);
+			end_work <- rnd (min_work_end,max_work_end);
+			living_place <- one_of(residential_building);
+			working_place <- one_of(industrial_building);
+			objective <- "resting";
+			location <- any_location_in(living_place);
+	}*/
 }
 }
 
@@ -151,7 +166,7 @@ experiment NewModel type: gui {
 			species building aspect: base;
 			species road aspect: base;
 			species people aspect: base; // adds people agent to the
-			species cars aspect: base;
+			//species cars aspect: base;
 			 
 		}
 
