@@ -3,6 +3,7 @@
 * Based on the internal empty template. 
 * Author: romar
 * Tags: 
+* File status: Updated by Yassir @15:01
 */
 
 
@@ -88,6 +89,15 @@ species road{
 	}
 }
 
+species cars{
+	rgb color <- #black;
+	float fuelCost;
+
+	aspect base{
+		draw circle(10) color:color;
+	}
+ 
+}
 
 species people skills:[moving] {
 	
@@ -140,24 +150,26 @@ experiment NewModel type: gui {
 		display city_display type: 3d {
 			species building aspect: base;
 			species road aspect: base;
-			species people aspect: base; // adds people agent to the 
+			species people aspect: base; // adds people agent to the
+			species cars aspect: base;
+			 
 		}
 
-		display chart_display refresh: every(10 #cycles) {
+		/*display chart_display refresh: every(10 #cycles) {
 			chart "People Objectif" type: pie style: exploded size: {1, 0.5} position: {0, 0.5} {
 				data "Working" value: people count (each.objective = "working") color: #magenta;
 				data "Resting" value: people count (each.objective = "resting") color: #blue;
 			}
 
-		}
+		}*/
 
-		display chart_displaySERIES refresh: every(10 #cycles) {
+		/*display chart_displaySERIES refresh: every(10 #cycles) {
 			chart "People Objectif" type: pie style: exploded size: {1, 0.5} position: {0, 0.5} {
 				data "Working" value: people count (each.objective = "working") color: #magenta;
 				data "Resting" value: people count (each.objective = "resting") color: #blue;
 			}
 
-		}
+		}*/
 
 	}
 
