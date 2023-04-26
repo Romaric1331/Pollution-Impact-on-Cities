@@ -36,7 +36,7 @@ global {
 	init{
 		
 		create building from: shape_file_buildings with:[type :: read("NATURE")]{
-			if type = "Residential" {color<-#blue;}
+			if type = "Residential" {color<-#powderblue;}
 		}
 		
 		create road from: shape_file_roads;
@@ -104,19 +104,12 @@ species road{
 	}
 }
 
-species cars{
-	rgb color <- #black;
-	float fuelCost;
 
-	aspect base{
-		draw circle(10) color:color;
-	}
- 
-}
 
 species people skills:[moving] {
 	
 	rgb color <- #yellow;
+	
 	
 	//added the following attributes
 	building living_place <- nil;
@@ -125,17 +118,27 @@ species people skills:[moving] {
 	int end_work;
 	string objective;
 	point the_target <- nil;
+	string travel_mode; 
 	
 	// added two new reflexes time to work and stop
 	
 	reflex time_to_work when: current_date.hour = start_work and objective = "resting"{
-	objective <- "working";
-	the_target <- any_location_in (working_place);
+		objective <- "working";
+		the_target <- any_location_in (working_place);
+		if flip(0.3){
+			travel_mode<-"car"; 
+			color <- #red;
+		}
+		else {
+			travel_mode<-"bike";
+			color <- #green;
+		}
 	}
 	
 	reflex time_to_go_home when: current_date.hour = end_work and objective = "working"{
 	objective <- "resting";
 	the_target <- any_location_in (living_place);
+	
 	}
 	
 	//added the reflex move
@@ -166,8 +169,7 @@ experiment NewModel type: gui {
 			species building aspect: base;
 			species road aspect: base;
 			species people aspect: base; // adds people agent to the
-			//species cars aspect: base;
-			 
+
 		}
 
 		/*display chart_display refresh: every(10 #cycles) {
