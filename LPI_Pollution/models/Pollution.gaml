@@ -95,16 +95,16 @@ species road{
 	}
 }
 
-species cars{
-	rgb color <- #black;
-	float fuelCost;
 
+<<<<<<< Updated upstream
 	aspect base{
 		draw circle(10) color:color;
 	}
  
 
 }
+=======
+>>>>>>> Stashed changes
 
 species people skills:[moving] {
 	
@@ -117,6 +117,7 @@ species people skills:[moving] {
 	int end_work;
 	string objective;
 	point the_target <- nil;
+	string travel_mode; 
 	
 	
 species bikes skills:[moving] {
@@ -136,13 +137,20 @@ species bikes skills:[moving] {
 	// added two new reflexes time to work and stop
 	
 	reflex time_to_work when: current_date.hour = start_work and objective = "resting"{
-	objective <- "working";
-	the_target <- any_location_in (working_place);
+		objective <- "working";
+		the_target <- any_location_in (working_place);
+		if flip(0.5){
+			travel_mode<-"car"; 
+		}
+		else {
+			travel_mode<-"bike";
+		}
 	}
 	
 	reflex time_to_go_home when: current_date.hour = end_work and objective = "working"{
 	objective <- "resting";
 	the_target <- any_location_in (living_place);
+	
 	}
 	
 	//added the reflex move
@@ -173,7 +181,11 @@ experiment NewModel type: gui {
 			species building aspect: base;
 			species road aspect: base;
 			species people aspect: base; // adds people agent to the
+<<<<<<< Updated upstream
 			species cars aspect: base;
+=======
+			
+>>>>>>> Stashed changes
 			 
 		}
 
