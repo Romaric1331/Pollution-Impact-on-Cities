@@ -21,9 +21,6 @@ global {
 	
 	int nb_people<-100;
 	
-	// bikes Asumpption: bikes are the same number of people ¿?
-	
-	
 	//adding these new parameters 
 	
 	date starting_date <- date("2019-09-01-00-00-00");
@@ -34,15 +31,12 @@ global {
 	float min_speed <- 1.0 #km /#h;
 	float max_speed <-5.0 #km / #h;
 	graph the_graph;
-	
-	//adding parametres 
-	
-	
+	int nb_cars <- 20;
 	
 	init{
 		
 		create building from: shape_file_buildings with:[type :: read("NATURE")]{
-			if type = "Residential" {color<-#blue;}
+			if type = "Residential" {color<-#powderblue;}
 		}
 		
 		create road from: shape_file_roads;
@@ -65,6 +59,7 @@ global {
 			
 			location<-any_location_in(one_of(residential_building));
 			
+			
 			//adding additional parameters in the initialisation of people agent
 			
 			speed <- rnd(min_speed, max_speed);
@@ -75,6 +70,20 @@ global {
 			objective <- "resting";
 			location <- any_location_in(living_place);
 	}
+	/*create cars number: nb_cars{
+			
+			location<-any_location_in(one_of(residential_building));
+			
+			//adding additional parameters in the initialisation of people agent
+			
+			speed <- rnd(min_speed, max_speed);
+			start_work<- rnd (min_work_start,max_work_start);
+			end_work <- rnd (min_work_end,max_work_end);
+			living_place <- one_of(residential_building);
+			working_place <- one_of(industrial_building);
+			objective <- "resting";
+			location <- any_location_in(living_place);
+	}*/
 }
 }
 
@@ -96,19 +105,11 @@ species road{
 }
 
 
-<<<<<<< Updated upstream
-	aspect base{
-		draw circle(10) color:color;
-	}
- 
-
-}
-=======
->>>>>>> Stashed changes
 
 species people skills:[moving] {
 	
 	rgb color <- #yellow;
+	
 	
 	//added the following attributes
 	building living_place <- nil;
@@ -119,31 +120,18 @@ species people skills:[moving] {
 	point the_target <- nil;
 	string travel_mode; 
 	
-	
-species bikes skills:[moving] {
-	
-	rgb color <- #magenta;
-	//bike start_station <- nil; 
-	//bike end_station <- nil; 
-	//int start_travel; 
-	//int end_travel; 
-	//string objetive; 
-	//point the_target <-nil; 
-	aspect base{
-		draw circle(10) color:color;
-	}
-	}	
-	
 	// added two new reflexes time to work and stop
 	
 	reflex time_to_work when: current_date.hour = start_work and objective = "resting"{
 		objective <- "working";
 		the_target <- any_location_in (working_place);
-		if flip(0.5){
+		if flip(0.3){
 			travel_mode<-"car"; 
+			color <- #red;
 		}
 		else {
 			travel_mode<-"bike";
+			color <- #green;
 		}
 	}
 	
@@ -181,11 +169,7 @@ experiment NewModel type: gui {
 			species building aspect: base;
 			species road aspect: base;
 			species people aspect: base; // adds people agent to the
-<<<<<<< Updated upstream
-			species cars aspect: base;
-=======
 			
->>>>>>> Stashed changes
 			 
 		}
 
