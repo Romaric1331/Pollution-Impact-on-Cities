@@ -1,19 +1,4 @@
-/**
-<<<<<<< HEAD
-
-* Name: Pollution
-
-* Based on the internal empty template.
-
-* Author: romar
-
-* Tags:
-
-* File status: Updated by Yassir @15:01
-
 */
-=======
->>>>>>> 7092e02ff5e9d0bbfbb20943d50df336b3f81dd6
 
 * Name: Pollution
 
@@ -176,14 +161,6 @@ objective <- "resting";
 
 location <- any_location_in(living_place);
 
-
-
-<<<<<<< HEAD
-
-
-
-=======
->>>>>>> 7092e02ff5e9d0bbfbb20943d50df336b3f81dd6
 if flip(0.1){
 
 travel_mode_type <- "luxury";
