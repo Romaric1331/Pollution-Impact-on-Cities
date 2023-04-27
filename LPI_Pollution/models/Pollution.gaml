@@ -221,8 +221,7 @@ experiment NewModel type: gui {
 			species building aspect: base;
 			species road aspect: base transparency: 0.5;
 			species people aspect: base; // adds people agent to the
-			
-			 
+
 		}
 
 		/*display chart_display refresh: every(10 #cycles) {
