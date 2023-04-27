@@ -29,6 +29,9 @@ float studentProb <- 0.5 parameter:true; //Probability for a student profile
 
 float lowIncomeProb <- 0.5 parameter:true; //Probability for a low-income profile
 
+
+
+
 float highIncomeProb <- 0.5 parameter:true; //Probability for a low-income profile
 
 
