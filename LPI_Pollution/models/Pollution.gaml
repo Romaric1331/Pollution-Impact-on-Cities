@@ -33,6 +33,10 @@ global {
 	graph the_graph;
 	int nb_cars <- 20;
 	
+	
+	float coef_polutant <- 0.99 parameter: true min: 0.0 max: 1.0;
+	int coef_car <- 1 parameter: true min:1 max 10;
+	
 	init{
 		
 		create building from: shape_file_buildings with:[type :: read("NATURE")]{
@@ -69,6 +73,16 @@ global {
 			working_place <- one_of(industrial_building);
 			objective <- "resting";
 			location <- any_location_in(living_place);
+			
+			
+			if flip(0.1){
+				travel_mode_type <- "luxury";
+				
+			} else {
+				travel_mode_type<- "normal";
+				
+			}
+			
 	}
 	/*create cars number: nb_cars{
 			
@@ -97,11 +111,27 @@ species building{
 }
 
 species road{
-	
+	float polluttion_cant;
+		
 	
 	aspect base{
-		draw shape color:color;
+		//draw shape color:blend(#black, #red, 1/polluttion_cant );
+		
+		if (polluttion_cant < 200 ){
+			draw shape  color: #lime;
+		}
+	     else if (polluttion_cant >= 200 ) and (polluttion_cant <= 400 ){
+			draw shape  color: #goldenrod;
+		}
+		 else if (polluttion_cant > 400 ){
+			draw shape  color: #red width: 15 depth: polluttion_cant*0.05;
+			
+		}
 	}
+	reflex pollution {
+		polluttion_cant<- polluttion_cant*coef_polutant;
+		 
+	} 
 }
 
 
@@ -119,6 +149,7 @@ species people skills:[moving] {
 	string objective;
 	point the_target <- nil;
 	string travel_mode; 
+	string travel_mode_type; // luxury and normal 
 	
 	// added two new reflexes time to work and stop
 	
@@ -128,6 +159,8 @@ species people skills:[moving] {
 		if flip(0.3){
 			travel_mode<-"car"; 
 			color <- #red;
+		
+			
 		}
 		else {
 			travel_mode<-"bike";
@@ -146,13 +179,32 @@ species people skills:[moving] {
 		
 		do goto target: the_target on: the_graph;
 		
+		
+		if (travel_mode = "car") {
+			
+		
+			//adding pollution 
+			list<geometry> segments <- current_path.segments;
+			loop line over: segments {
+				ask road(current_path agent_from_geometry line) { 
+				polluttion_cant <- polluttion_cant + coef_car;
+					}
+			}
+		}	
 		if the_target = location {
-			the_target <- nil;
+			the_target <- nil ;
 		}
 	}
 	
 	aspect base{
 		draw circle(10) color:color;
+		
+		if travel_mode_type = "normal"{
+			draw circle(10) color:color;
+		}
+		else {
+			draw triangle(50) color:#blue;
+		}
 	}
 }
 
@@ -167,7 +219,7 @@ experiment NewModel type: gui {
 	output {
 		display city_display type: 3d {
 			species building aspect: base;
-			species road aspect: base;
+			species road aspect: base transparency: 0.5;
 			species people aspect: base; // adds people agent to the
 
 		}
