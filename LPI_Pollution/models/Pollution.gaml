@@ -1,5 +1,4 @@
-*/
-
+/**
 * Name: Pollution
 
 * Based on the internal empty template.
