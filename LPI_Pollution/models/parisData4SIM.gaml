@@ -12,12 +12,12 @@ global {
 	
 	
 	//file road_shape_file<-file("../includes/geofabrik_roads_projected_rgf93cc49zone8_clipped.shp");
-	file road_shape_file<-file("../includes/geofabrik_roads_projected_rgf93cc49zone8_clipped_selectedRoads.shp");
+	file road_shape_file<-file("../includes/Paris BIG/geofabrik_roads_projected_rgf93cc49zone8_clipped_selectedRoads.shp");
 	
-	file arrondisement_shape_file<-file("../includes/arrondisements_projected_rgf93cc49zone8.shp");
+	file arrondisement_shape_file<-file("../includes/Paris BIG/arrondisements_projected_rgf93cc49zone8.shp");
 	
 	//file building_shape_file<-file("../includes/geofabrik_building_projected_rgf93cc49zone8_clipped.shp");
-	file building_shape_file<-file("../includes/geofabrik_building_projected_rgf93cc49zone8_clipped_selected.shp");
+	file building_shape_file<-file("../includes/Paris BIG/geofabrik_building_projected_rgf93cc49zone8_clipped_selected.shp");
 	
 		
 	geometry shape<-envelope(road_shape_file);
