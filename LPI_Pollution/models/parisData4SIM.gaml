@@ -22,11 +22,12 @@ global {
 		
 	geometry shape<-envelope(road_shape_file);
 	
+	
 	init{
 		create road from:road_shape_file;
 		create arrondisement from:arrondisement_shape_file;
 		create building from:building_shape_file;
-	
+		
 	}
 	
 }

@@ -70,10 +70,19 @@ global {
 		
 		//creating the road agents from the roads shapefile
 		
-		create road from:shape_file_roads;
-	
-        the_graph <- as_edge_graph(road); //initialise the road as graph
+		//create road from:shape_file_roads;
 		
+		list ll <- shape_file_roads.contents;
+	
+        graph any_graph <- as_edge_graph(ll); //initialise the road as graph
+        list l <- connected_components_of(any_graph);
+        
+        list proper_list;
+        write first(l);
+        //loop e over:first(l) { proper_list <- any_graph e }
+        
+        loop r over:first(l) {create road with:[shape::r];}
+		the_graph <- as_edge_graph(road);
 		
 		//create a list of buildings which are residential 
 		//list<building> residential_buildings<-building where (each.type="residential");
