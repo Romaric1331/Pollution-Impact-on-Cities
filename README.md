@@ -20,3 +20,7 @@ Ambient (outdoor) air pollution is estimated to have caused 4.2 million prematur
 - Some 89% of those premature deaths occurred in low- and middle-income countries, and the greatest number in the WHO South-East Asia and Western Pacific Regions.
 
 - Policies and investments supporting cleaner transport, energy efficient homes, power generation, industry and better municipal waste management would reduce key sources of outdoor air pollution. Access to clean household energy would also greatly reduce ambient air pollution in some regions.
+
+## License
+
+MIT
